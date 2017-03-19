@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container" ng-controller="groupsListController">
+
+    <div class="row m-t-15">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <button type="button" class="btn btn-success" ng-click="createNewGroup()">Create new group</button>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div ng-repeat="group in groups">
+                            <div class="col-md-6">
+                                <div class="thumbnail box">
+                                    <div class="caption">
+                                        <h3 ng-bind="'Name: ' + group.Name"></h3>
+                                        <h5 ng-bind="'Description: ' + (group.Description ? group.Description: '')"></h5>
+                                        <p ng-bind="'Members Count: ' + group.MembersCount"></p>
+                                        <p ng-bind="'Stories Count: ' + group.StoriesCount"></p>
+                                        <hr />
+                                        <button ng-if="!group.IsInGroup" ng-click="joinOrLeaveGroup(group, true)" class="btn btn-success btn-xs">Join</button>
+                                        <button ng-if="group.IsInGroup" ng-click="joinOrLeaveGroup(group, false)" class="btn btn-danger btn-xs">Leave</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row m-t-15">
+        <div class="col-md-4 col-md-offset-4">
+            <button type="button" ladda="isLoading" data-spinner-color="#999999" data-style="slide-up" class="btn btn-default btn-block" ng-click="loadMoreGroups()">Show More</button>
+
+        </div>
+    </div>
+
+    @Html.Partial("_GroupModal")
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/app/services/groupService.js"></script>
+    <script src="~/Scripts/app/controllers/groupController.js"></script>
+}

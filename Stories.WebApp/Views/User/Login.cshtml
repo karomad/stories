@@ -1,0 +1,59 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html ng-app="appLogin">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/toastr.min.css" rel="stylesheet" />
+    <link href="~/Scripts/ladda/dist/ladda-themeless.min.css" rel="stylesheet" />
+</head>
+<body ng-controller="loginController">
+
+    <div class="middle-box text-center loginscreen">
+        <div class="panel panel-default" >
+            <div class="panel-body">
+                <form name="loginForm" ng-submit="login(loginForm.$valid)" novalidate>
+                    <h3>Sign In</h3>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-log-in"></i></span>
+                                    <input type="text" class="form-control" placeholder="Name" name="Name" ng-model="User.Name" required>
+                                </div>
+
+                                <p class="text-danger" ng-show="loginForm.Name.$invalid && showValidationErrors" ng-bind="'Name is required'"></p>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" ladda="isLoading" data-style="slide-up" class="btn btn-primary btn-block">Sign In</button>
+                            </div>
+                        </div>
+                    </div>
+                  
+                </form>
+            </div>
+        </div>
+      
+    </div>
+  
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/angular-route.min.js"></script>
+    <script src="~/Scripts/app/appLogin.js"></script>
+    <script src="~/Scripts/toastr.min.js"></script>
+    <script src="~/Scripts/ladda/dist/spin.min.js"></script>
+    <script src="~/Scripts/ladda/dist/ladda.min.js"></script>
+    <script src="~/Scripts/angular-ladda/dist/angular-ladda.min.js"></script>
+    <script src="~/Scripts/app/services/loginService.js"></script>
+    <script src="~/Scripts/app/controllers/loginController.js"></script>
+</body>
+</html>

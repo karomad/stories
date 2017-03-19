@@ -1,0 +1,76 @@
+﻿@model System.Int32
+@{
+    ViewBag.Title = "AddEditStory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container" ng-controller="storyController">
+    <div class="row m-t-15">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <label ng-bind="current.Id == 0 ? 'New story' : current.Title"></label>
+                </div>
+                <div class="panel-body">
+                    <form name="storyForm" ng-submit="saveStory(storyForm.$valid)" novalidate>
+                        <div class="form-group">
+                            <label for="Title">Title</label>
+                            <input id="Title" name="Title" type="text" ng-model="current.Title" class="form-control" required />
+                            <p class="text-danger" ng-show="storyForm.Title.$invalid && showValidationErrors" ng-bind="'Title is required'"></p>
+                        </div>
+                        <div class="form-group">
+                            <label for="Description">Description</label>
+                            <textarea id="Description" name="Description" class="form-control" ng-model="current.Description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="Content">Content</label>
+                            <textarea id="Content" name="Content" class="form-control" ng-model="current.Content"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="Groups">Groups</label>
+                            <tags-input id="Groups"
+                                        ng-model="tags"
+                                        min-length="1"
+                                        display-property="Name"
+                                        key-property="Id"
+                                        placeholder="Search groups"
+                                        replace-spaces-with-dashes="false">
+                                <auto-complete source="loadGroups($query)"
+                                               min-length="1"
+                                               load-on-focus="false"
+                                               load-on-empty="false"
+                                               max-results-to-show="20"
+                                               highlight-matched-text="false"
+                                               template="my-custom-template"></auto-complete>
+                            </tags-input>
+                            <p class="text-danger" ng-show="showValidationErrors" ng-bind="'Plesae select group'"></p>
+
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+@section Scripts {
+    <script>
+        var storyId = @Model;
+    </script>
+    <script src="~/Scripts/app/services/storyService.js"></script>
+    <script src="~/Scripts/app/services/groupService.js"></script>
+    <script src="~/Scripts/app/controllers/storyController.js"></script>
+    <script type="text/ng-template" id="my-custom-template">
+        <div class="autocomplete-right-panel">
+            <span>{{data.Name}}</span>
+        </div>
+    </script>
+}

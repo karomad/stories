@@ -1,0 +1,24 @@
+﻿<div class="modal fade" tabindex="-1" role="dialog" id="storyDetailsModal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" ng-bind="current.Title"></h4>
+                </div>
+                <div class="modal-body">
+                    <h4>Description</h4>
+                    <p ng-bind="current.Description"></p>
+                    <h4>Posted On</h4>
+                    <p ng-bind="current.PostedOn | amDateFormat:'MM/DD/YYYY HH:MM'"></p>
+                    <h4>Posted in groups</h4>
+                    <div ng-repeat="group in current.Groups">
+                       <h5><span class="label label-info" ng-bind="group.Name"></span></h5> 
+                    </div>
+                    <hr />
+                    <h4>Content</h4>
+                    <p ng-bind="current.Content"></p>
+                </div>
+            
+        </div>
+    </div>
+</div>
